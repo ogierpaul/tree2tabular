@@ -47,21 +47,26 @@ output: automatically generated ids and tree in tabular structure:
 |  1 | subcategory2        | subsubcategory2     | subsubcategory2     | 3860c7              | e7921e              | e7921e              |
 
 ## Others methods
-Re-use as a dataframe:
+### Re-use as a dataframe:
 ```python
 df = tree.to_dataframe()
 ```
 
-Export a new yaml file with ids:
+### Export a new yaml file with ids:
 ```python
 tree.to_yaml('my_tree_with_ids.yaml')
 ```
 
-## Basic usage
+
+
+## Usage requirements:
 ### Yaml structure
 * Always start with the keyword 'Hierarchy'
 * Provide under `Hierarchy` the following parameters: `name`, `id_generation`, `childs`
-* Each node has three properties: `name`, `id`, `childs`
+* Each node can have three properties: `name`, `id`, `childs`
+    * The `childs` property is a list of nodes, can be null if no child nodes
+    * The `id` property is optional, if not provided, it will be generated based on the `id_generation` parameter
+    * The `name` property is mandatory
 
 ### name parameter
 * At the top of the hierarchy: is the name of the dimension used as column for the tabular data
@@ -74,9 +79,14 @@ tree.to_yaml('my_tree_with_ids.yaml')
 * error: raise an error if no id provided
 
 ### Output structure
+#### Creation of column names using the `name` parameter
 * The output is a tabular structure with the following columns: `DIM_CATEGORY_LVL1`, `DIM_CATEGORY_LVL2`, etc. and `TXT_CATEGORY_LVL1`, `TXT_CATEGORY_LVL2`, etc.
-* The `DIM_` columns contain the ids of the nodes
-* The `TXT_` columns contain the names of the nodes
+* The `DIM_` columns contain the ids of the nodes.
+* The `TXT_` columns contain the names of the nodes.
+  
+#### The higher the level, the deeper the node
+* The **level 1 corresponds to the top of the hierarchy**, the highest the level, the deeper the node is in the hierarchy
+* The **primary key** of the table is the `DIM_` columns with the highest level, and the highest granularity.
 * There is no blank: if a node has no child, the `DIM_` and `TXT_` columns of the lowest level are filled with the id and name of the node
 
 ### Example
