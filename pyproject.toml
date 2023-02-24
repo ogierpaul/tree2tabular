@@ -1,8 +1,18 @@
 [project]
 name = "tree2tabular"
+version = "0.1.0"
 description = "Wrapper around treelib to convert tree to tabular format"
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
+    "License :: OSI Approved :: MIT License"
 ]
+
+[build-system]
+requires = [
+"setuptools>=45",
+"setuptools_scm[toml]>=6.2"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
