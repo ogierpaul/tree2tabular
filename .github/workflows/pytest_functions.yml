@@ -1,4 +1,4 @@
-name: staging_functions
+name: pytest_functions
 # From https://hackernoon.com/how-to-integrate-github-actions-and-cicd-with-your-next-python-project
 # https://github.com/horosin/python-standard-ci
 # https://www.section.io/engineering-education/setting-up-cicd-for-python-packages-using-github-actions/
@@ -26,8 +26,8 @@ jobs:
         python -m pip install -r requirements.txt
     - name: Lint with flake8
       run: |
-        flake8 ./staging --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 ./staging --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+        flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
     - name: Pytest
       run: |
         pytest ./tests

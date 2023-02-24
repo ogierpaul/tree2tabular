@@ -3,38 +3,38 @@ Hierarchy:
   id_generation: uuid
   childs:
   - name: Airbus Helicopters
-    id: f9e747
+    id: e4d79b
     childs:
     - name: Airbus helicopters Donauwörth gmbH
-      id: 896eba
+      id: 19d5e6
     - name: Airbus helicopters Grand Prairie Ltd
-      id: 13251f
+      id: 32f072
     - name: Airbus helicopters Marignane SAS
-      id: 5452b1
+      id: e2062e
   - name: Airbus Industries
-    id: 1fd731
+    id: 9167b8
     childs:
     - name: Airbus Commercial Aircraft
-      id: 41988d
+      id: 07b6f9
       childs:
       - name: Airbus Industries Deutschland gmbH
-        id: '988583'
+        id: 2689f5
       - name: Airbus Industries France SAS
-        id: 4b4252
+        id: 3d135c
       - name: Airbus Industries Spain
-        id: 4e8f89
+        id: 8e53b6
       - name: Airbus Industries UK
-        id: 13246b
+        id: ca9789
     - name: Airbus global services
-      id: 9c1545
+      id: 6fa8e9
     - name: Satair
-      id: 2a4371
+      id: 5fc7dd
   - name: Airbus defense & space
-    id: a77137
+    id: 4d27f5
     childs:
     - name: Airbus Defence and Space GmbH
-      id: e6c41d
+      id: f1b7eb
     - name: Astrium Ltd
-      id: 4a00bb
+      id: 63306b
     - name: Cassidian SAS
-      id: 88ece3
+      id: 5796de

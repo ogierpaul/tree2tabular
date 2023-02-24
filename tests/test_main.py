@@ -1,4 +1,4 @@
-from src import TreeBuilder
+from tree2tabular import TreeBuilder
 import os
 
 import yaml
