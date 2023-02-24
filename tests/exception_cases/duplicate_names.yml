@@ -1,0 +1,8 @@
+Hierarchy:
+    name: category
+    id_generation: name # Will throw an error if two same names are provided
+    childs:
+        - name: subcategory
+          childs:
+            - name: subcategory # Duplicate name
+        - name: subcategory2

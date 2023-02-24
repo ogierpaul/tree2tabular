@@ -1,0 +1,13 @@
+Hierarchy: #Always start the yaml file with this line
+    name: category # This is the name of the dimension used as column for the tabular data
+    id_generation: uuid # Use one of those: uuid, name, or error
+    # Keep this structure for the nodes
+    childs:
+        - name: subcategory
+          childs:
+              - name: subsubcategory
+                childs:
+                    - name: subsubsubcategory
+        - name: subcategory2
+          childs:
+              - name: subsubcategory2
