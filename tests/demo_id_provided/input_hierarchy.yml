@@ -1,6 +1,6 @@
 Hierarchy: #Always start the yaml file with this line
   name: pnl_category # This is the name of the dimension used as column for the tabular data
-  id_generation: error # Three possible values for generating node ids: 'name' -> use name, 'uuid'->generate ,'error'->throw error
+  id_generation: error # Possible values for generating node ids: 'name' -> use name, 'incremental' --> generate integers, 'uuid'->generate uuid ,'error'->throw error
   # Keep this structure for the nodes
   childs:
     - name: Expenses

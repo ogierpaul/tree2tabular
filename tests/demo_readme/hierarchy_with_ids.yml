@@ -3,15 +3,15 @@ Hierarchy:
   id_generation: uuid
   childs:
   - name: subcategory
-    id: a0a447
+    id: f231d9
     childs:
     - name: subsubcategory
-      id: 968c8d
+      id: f7326e
       childs:
       - name: subsubsubcategory
-        id: c4d925
+        id: 08af7a
   - name: subcategory2
-    id: b07946
+    id: 8a1fd0
     childs:
     - name: subsubcategory2
-      id: 40641e
+      id: ca2167

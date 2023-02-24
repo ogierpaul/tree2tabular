@@ -1,6 +1,6 @@
 Hierarchy: #Always start the yaml file with this line
   name: company # This is the name of the dimension
-  id_generation: uuid # Three possible values for generating node ids: 'name' -> use name, 'uuid'->generate ,'error'->throw error
+  id_generation: uuid # Possible values for generating node ids: 'name' -> use name, 'incremental' --> generate integers, 'uuid'->generate uuid ,'error'->throw error
   # Keep this structure for the nodes
   childs:
     - name: Airbus Industries

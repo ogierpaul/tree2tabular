@@ -24,6 +24,9 @@ def test_case_id_provided():
 def test_case_some_id_provided():
     assert handle_case('demo_some_id_provided')
 
+def test_case_id_incremental():
+    assert handle_case('demo_id_incremental')
+
 
 
 
