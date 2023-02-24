@@ -1,0 +1,25 @@
+Hierarchy: #Always start the yaml file with this line
+  name: company # This is the name of the dimension
+  id_generation: uuid # Three possible values for generating node ids: 'name' -> use name, 'uuid'->generate ,'error'->throw error
+  # Keep this structure for the nodes
+  childs:
+    - name: Airbus Industries
+      childs:
+        - name: Airbus Commercial Aircraft
+          childs:
+            - name: Airbus Industries Deutschland gmbH
+            - name: Airbus Industries UK
+            - name: Airbus Industries Spain
+            - name: Airbus Industries France SAS
+        - name: Satair
+        - name: Airbus global services
+    - name: Airbus Helicopters
+      childs:
+        - name: Airbus helicopters Donauwörth gmbH
+        - name: Airbus helicopters Marignane SAS
+        - name: Airbus helicopters Grand Prairie Ltd
+    - name: Airbus defense & space
+      childs:
+        - name: Airbus Defence and Space GmbH
+        - name: Cassidian SAS
+        - name: Astrium Ltd

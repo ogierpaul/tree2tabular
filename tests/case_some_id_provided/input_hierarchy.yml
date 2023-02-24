@@ -1,0 +1,17 @@
+Hierarchy: #Always start the yaml file with this line
+  name: world_best_place_to_live # This is the name of the dimension
+  id_generation: name # Three possible values for generating node ids: 'name' -> use name, 'uuid'->generate ,'error'->throw error
+  # Keep this structure for the nodes
+  childs:
+    - name: Top-Tier
+      childs:
+        - name: France
+          id: FR
+        - name: Italy
+          id: IT
+        - name: Portugal
+    - name: Doable
+      childs:
+        - name: Spain
+          id: ES
+        - name: Germany

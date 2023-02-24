@@ -1,0 +1,50 @@
+Hierarchy:
+  name: pnl_category
+  id_generation: error
+  childs:
+  - name: Expenses
+    id: 1
+    childs:
+    - name: Consumption expenses
+      id: 13
+      childs:
+      - name: Clothing
+        id: 134
+      - name: Food
+        id: 131
+      - name: Health
+        id: 135
+      - name: Housing
+        id: 132
+      - name: Leisure
+        id: 136
+      - name: Other expenses
+        id: 137
+      - name: Transportation
+        id: 133
+    - name: Mandatory
+      id: 11
+      childs:
+      - name: Credit card fees
+        id: 112
+      - name: Taxes
+        id: 111
+    - name: Savings
+      id: 12
+      childs:
+      - name: Investment account
+        id: 122
+      - name: Savings account
+        id: 121
+  - name: Income
+    id: 2
+    childs:
+    - name: Other income
+      id: 22
+    - name: Salary
+      id: 21
+      childs:
+      - name: Base salary
+        id: 211
+      - name: Bonus
+        id: 212

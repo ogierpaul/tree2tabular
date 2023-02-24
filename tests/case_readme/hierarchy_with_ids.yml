@@ -1,0 +1,17 @@
+Hierarchy:
+  name: category
+  id_generation: uuid
+  childs:
+  - name: subcategory
+    id: b3242c
+    childs:
+    - name: subsubcategory
+      id: 9d3d60
+      childs:
+      - name: subsubsubcategory
+        id: 12ea22
+  - name: subcategory2
+    id: ed1be9
+    childs:
+    - name: subsubcategory2
+      id: 9e36da

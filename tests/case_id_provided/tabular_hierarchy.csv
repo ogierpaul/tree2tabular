@@ -1,0 +1,15 @@
+DIM_PNL_CATEGORY_LVL1,DIM_PNL_CATEGORY_LVL2,DIM_PNL_CATEGORY_LVL3,TXT_PNL_CATEGORY_LVL1,TXT_PNL_CATEGORY_LVL2,TXT_PNL_CATEGORY_LVL3
+1,11,111.0,Expenses,Mandatory,Taxes
+1,11,112.0,Expenses,Mandatory,Credit card fees
+1,12,121.0,Expenses,Savings,Savings account
+1,12,122.0,Expenses,Savings,Investment account
+1,13,131.0,Expenses,Consumption expenses,Food
+1,13,132.0,Expenses,Consumption expenses,Housing
+1,13,133.0,Expenses,Consumption expenses,Transportation
+1,13,134.0,Expenses,Consumption expenses,Clothing
+1,13,135.0,Expenses,Consumption expenses,Health
+1,13,136.0,Expenses,Consumption expenses,Leisure
+1,13,137.0,Expenses,Consumption expenses,Other expenses
+2,21,211.0,Income,Salary,Base salary
+2,21,212.0,Income,Salary,Bonus
+2,22,22.0,Income,Other income,Other income

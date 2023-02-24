@@ -1,0 +1,20 @@
+Hierarchy:
+  name: world_best_place_to_live
+  id_generation: name
+  childs:
+  - name: Doable
+    id: Doable
+    childs:
+    - name: Germany
+      id: Germany
+    - name: Spain
+      id: ES
+  - name: Top-Tier
+    id: Top-Tier
+    childs:
+    - name: France
+      id: FR
+    - name: Italy
+      id: IT
+    - name: Portugal
+      id: Portugal
