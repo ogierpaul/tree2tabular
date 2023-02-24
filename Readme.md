@@ -14,9 +14,9 @@ The `yaml` file should have the structure described below:
 
 
 ```yaml
-Hierarchy:
-    name: category #Always start the yaml file with this line
-    id_generation: uuid # This is the name of the dimension used as column for the tabular data
+Hierarchy: #Always start the yaml file with this line``
+    name: category # This is the name of the dimension used as column for the tabular data
+    id_generation: uuid # Use one of those: uuid, name, or error
     # Keep this structure for the nodes
     childs:
         - name: subcategory
@@ -56,6 +56,28 @@ Export a new yaml file with ids:
 ```python
 tree.to_yaml('my_tree_with_ids.yaml')
 ```
+
+## Basic usage
+### Yaml structure
+* Always start with the keyword 'Hierarchy'
+* Provide under `Hierarchy` the following parameters: `name`, `id_generation`, `childs`
+* Each node has three properties: `name`, `id`, `childs`
+
+### name parameter
+* At the top of the hierarchy: is the name of the dimension used as column for the tabular data
+    * e.g. `name: category` will generate the columns `DIM_CATEGORY_LVL1`, `DIM_CATEGORY_LVL2`, etc.
+* Inside the hierarchy: is the name of the node
+
+### id_generation parameter
+* uuid: generate a unique id for each node if no id provided
+* name: use the name of the node as id if no id provided
+* error: raise an error if no id provided
+
+### Output structure
+* The output is a tabular structure with the following columns: `DIM_CATEGORY_LVL1`, `DIM_CATEGORY_LVL2`, etc. and `TXT_CATEGORY_LVL1`, `TXT_CATEGORY_LVL2`, etc.
+* The `DIM_` columns contain the ids of the nodes
+* The `TXT_` columns contain the names of the nodes
+* There is no blank: if a node has no child, the `DIM_` and `TXT_` columns of the lowest level are filled with the id and name of the node
 
 
 
