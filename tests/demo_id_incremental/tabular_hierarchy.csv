@@ -1,0 +1,7 @@
+TXT_PNL_CATEGORY_LVL1,TXT_PNL_CATEGORY_LVL2,TXT_PNL_CATEGORY_LVL3,DIM_PNL_CATEGORY_LVL1,DIM_PNL_CATEGORY_LVL2,DIM_PNL_CATEGORY_LVL3
+Expenses,Mandatory,Taxes,1,11,111
+Expenses,Mandatory,Credit card fees,1,11,112
+Expenses,Consumption expenses,Food,1,301,302
+Expenses,Consumption expenses,Housing,1,301,303
+Income,Salary,Base salary,2,300,211
+Income,Salary,Bonus,2,300,212
