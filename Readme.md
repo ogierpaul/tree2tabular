@@ -41,10 +41,10 @@ tree.to_csv('my_tree.csv')
 
 output: automatically generated ids and tree in tabular structure:    
 
-|    | TXT_CATEGORY_LVL1   | TXT_CATEGORY_LVL2   | TXT_CATEGORY_LVL3   | DIM_CATEGORY_LVL1   | DIM_CATEGORY_LVL2   | DIM_CATEGORY_LVL3   |
-|---:|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|
-|  0 | subcategory         | subsubcategory      | subsubsubcategory   | 7690c4              | 163eed              | 6d0573              |
-|  1 | subcategory2        | subsubcategory2     | subsubcategory2     | 3860c7              | e7921e              | e7921e              |
+| TXT_CATEGORY_LVL1   | TXT_CATEGORY_LVL2   | TXT_CATEGORY_LVL3   | DIM_CATEGORY_LVL1   | DIM_CATEGORY_LVL2   | DIM_CATEGORY_LVL3   |
+|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|:--------------------|
+| subcategory         | subsubcategory      | subsubsubcategory   | 7690c4              | 163eed              | 6d0573              |
+| subcategory2        | subsubcategory2     | subsubcategory2     | 3860c7              | e7921e              | e7921e              |
 
 ## Others methods
 ### Re-use as a dataframe:
