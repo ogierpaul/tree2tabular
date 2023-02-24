@@ -1,0 +1,33 @@
+name: pytest_functions
+# From https://hackernoon.com/how-to-integrate-github-actions-and-cicd-with-your-next-python-project
+# https://github.com/horosin/python-standard-ci
+# https://www.section.io/engineering-education/setting-up-cicd-for-python-packages-using-github-actions/
+on:
+  push:
+    branches: [main, dev_*, qa*, paul_*]
+
+jobs:
+  staging_functions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip==22.3.1
+        python -m pip install --upgrade flake8==6.0.0
+        python -m pip install --upgrade pytest==7.2.0
+        python -m pip install -r requirements.txt
+    - name: Lint with flake8
+      run: |
+        flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
+    - name: Pytest
+      run: |
+        pytest ./tests
