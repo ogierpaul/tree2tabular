@@ -13,5 +13,5 @@ jobs:
     -
       name: Create Release ${{ github.event.pull_request.title }}
       uses: bfren/create-release@v1
-#      with:
-#        token: ${{ secrets.PAT }}
+      with:
+        token: ${{ secrets.tree2tabular_pr_to_release_fine_grained }}
