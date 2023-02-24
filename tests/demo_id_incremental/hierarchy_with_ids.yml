@@ -1,0 +1,31 @@
+Hierarchy:
+  name: pnl_category
+  id_generation: incremental
+  childs:
+  - name: Expenses
+    id: 1
+    childs:
+    - name: Consumption expenses
+      id: 301
+      childs:
+      - name: Food
+        id: 302
+      - name: Housing
+        id: 303
+    - name: Mandatory
+      id: 11
+      childs:
+      - name: Credit card fees
+        id: 112
+      - name: Taxes
+        id: 111
+  - name: Income
+    id: 2
+    childs:
+    - name: Salary
+      id: 300
+      childs:
+      - name: Base salary
+        id: 211
+      - name: Bonus
+        id: 212
