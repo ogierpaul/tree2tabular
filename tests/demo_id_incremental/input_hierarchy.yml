@@ -1,0 +1,29 @@
+Hierarchy: #Always start the yaml file with this line
+  name: pnl_category # This is the name of the dimension used as column for the tabular data
+  id_generation: incremental # Possible values for generating node ids: 'name' -> use name, 'incremental' --> generate integers, 'uuid'->generate uuid ,'error'->throw error
+  # Keep this structure for the nodes
+  childs:
+    - name: Expenses
+      id: 1
+      childs:
+        - name: Mandatory
+          id: 11
+          childs:
+            - name: Taxes
+              id: 111
+            - name: Credit card fees
+              id: 112
+        - name: Consumption expenses # This node and leaves don't have ids
+          childs:
+            - name: Food
+            - name: Housing
+    - name: Income
+      id: 2
+      childs:
+        - name: Salary
+          id: 300
+          childs:
+            - name: Base salary
+              id: 211
+            - name: Bonus
+              id: 212

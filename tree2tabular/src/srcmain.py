@@ -26,22 +26,54 @@ def _load_yaml(fn:str) ->dict:
 
 class TreeBuilder(object):
     def __init__(self, d:dict):
-        self._generation_possible_values = ['name', 'uuid' ,'error']
+        self._generation_possible_values = ['name', 'uuid' ,'error', 'incremental']
+        self._identifiers = []
         self.d = d
-        assert d.get('Hierarchy') is not None
+        if d.get('Hierarchy') is None:
+            raise (ValueError('Hierarchy key not found in yaml file'))
+        if d['Hierarchy'].get('id_generation') is None:
+            raise (ValueError('id_generation key not found in yaml file'))
+        if d['Hierarchy'].get('childs') is None:
+            raise (ValueError('childs key not found in yaml file'))
         self.id_generation = d['Hierarchy']['id_generation']
         if self.id_generation not in self._generation_possible_values:
             raise (ValueError(
                 f"""id_generation {self.id_generation} not supported, must be one of {self._generation_possible_values}"""
             ))
+        self._map_identifiers_from_dict(d['Hierarchy']['childs'])
+        if self.id_generation == 'incremental':
+            self._identifiers = [self._to_integer(x) for x in self._identifiers]
         self.tree = Tree()
-        self.tree.create_node('Root', 'root')
+        self.tree.create_node('Root', 0)
         self.dim_name = d['Hierarchy']['name']
         self._build()
+
+    def _to_integer(self, x)->int:
+        if isinstance(x, int):
+            child_id = x
+        elif isinstance(x, str) and x.isdigit():
+            child_id = int(x)
+        else:
+            raise (ValueError(f""" with id_generation {self.id_generation} id must be an integer"""))
+        return child_id
+
+    def _map_identifiers_from_dict(self, children) ->list:
+        for child in children:
+            if child.get('id') is not None:
+                self._identifiers.append(child.get('id'))
+            if child.get('childs') is not None:
+                self._map_identifiers_from_dict(child.get('childs'))
 
     @classmethod
     def from_yaml(cls, fn:str):
         return cls(_load_yaml(fn))
+
+    def _increment_identifier(self):
+        if self.id_generation == 'incremental':
+            if len(self._identifiers) == 0:
+                return 1
+            else:
+                return max(self._identifiers) + 1
 
     def _explore_sub_level(self, parent_id:str, childs:dict):
         for c in childs:
@@ -55,21 +87,27 @@ class TreeBuilder(object):
                     child_id = str(uuid.uuid4())[:6]
                 elif self.id_generation == 'error':
                     raise (KeyError(f"""No id provided for node name {c.get('name')}"""))
+                elif self.id_generation == 'incremental':
+                    child_id = self._increment_identifier()
                 else:
                     raise (ValueError(f"""id_generation {self.id_generation} not supported, must be one of {self._generation_possible_values}"""))
             else:
-                child_id = c.get('id')
+                if self.id_generation == 'incremental':
+                    child_id = self._to_integer(c.get('id'))
+                else:
+                    child_id = c.get('id')
             if self.tree.get_node(child_id) is not None:
                 new_node_name = c.get('name')
                 existing_node_name = self.tree.get_node(child_id).tag
                 raise (KeyError(f"""Node identifier {child_id} is not unique, \
                 please check your hierarchy for node names {new_node_name} and {existing_node_name}"""))
             self.tree.create_node(c.get('name'), child_id, parent=parent_id)
+            self._identifiers.append(child_id)
             if c.get('childs') is not None:
                 self._explore_sub_level(child_id, c.get('childs'))
 
     def _build(self):
-        self._explore_sub_level('root', self.d.get('Hierarchy').get('childs'))
+        self._explore_sub_level(0, self.d.get('Hierarchy').get('childs'))
         return self.tree
 
     def to_dataframe(self) ->pd.DataFrame:

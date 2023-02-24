@@ -16,7 +16,7 @@ The `yaml` file should have the structure described below:
 ```yaml
 Hierarchy: #Always start the yaml file with this line``
     name: category # This is the name of the dimension used as column for the tabular data
-    id_generation: uuid # Use one of those: uuid, name, or error
+    id_generation: uuid # Possible values for generating node ids: 'name' -> use name, 'incremental' --> generate integers, 'uuid'->generate uuid ,'error'->throw error if no id provided
     # Keep this structure for the nodes
     childs:
         - name: subcategory
@@ -74,9 +74,10 @@ tree.to_yaml('my_tree_with_ids.yaml')
 * Inside the hierarchy: is the name of the node
 
 ### id_generation parameter
-* uuid: generate a unique id for each node if no id provided
-* name: use the name of the node as id if no id provided
-* error: raise an error if no id provided
+* `uuid` : generate a unique id for each node if no id provided
+* `name` : use the name of the node as id if no id provided
+* `error` : raise an error if no id provided
+* `incremental` : generate an incremental id for each node if no id provided, expects only integer value
 
 ### Output structure
 #### Creation of column names using the `name` parameter
