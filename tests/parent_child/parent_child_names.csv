@@ -1,0 +1,9 @@
+parent_name,child_name
+Root,Root
+Root,Grandma
+Grandma,Mom
+Mom,Me
+Mom,Sister
+Mom,Brother
+Grandma,Aunt Matty
+Aunt Matty,Distant cousin

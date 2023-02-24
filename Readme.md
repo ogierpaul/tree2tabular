@@ -57,6 +57,18 @@ df = tree.to_dataframe()
 tree.to_yaml('my_tree_with_ids.yaml')
 ```
 
+### Export a parent-child table:
+```python
+df = tree.to_parent_child(use_names=True)
+```
+
+output:
+|parent   | child   |
+|:--------|:--------|
+|Grandma  |Mom      |
+|Mom      |Son      |
+|Mom      |Daughter |
+
 
 
 ## Usage requirements:
@@ -65,7 +77,7 @@ tree.to_yaml('my_tree_with_ids.yaml')
 * Provide under `Hierarchy` the following parameters: `name`, `id_generation`, `childs`
 * Each node can have three properties: `name`, `id`, `childs`
     * The `childs` property is a list of nodes, can be null if no child nodes
-    * The `id` property is optional, if not provided, it will be generated based on the `id_generation` parameter
+    * The `id` property is optional, if not provided, it will be generated based on the `id_generation` parameter. The `0` value is reserved for the root node.
     * The `name` property is mandatory
 
 ### name parameter

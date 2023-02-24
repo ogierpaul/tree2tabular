@@ -1,0 +1,15 @@
+Hierarchy: #Always start the yaml file with this line
+    name: my_family # This is the name of the dimension used as column for the tabular data
+    id_generation: incremental # Possible values for generating node ids: 'name' -> use name, 'incremental' --> generate integers, 'uuid'->generate uuid ,'error'->throw error
+    # Keep this structure for the nodes
+    childs:
+        - name: Grandma
+          childs:
+              - name: Mom
+                childs:
+                    - name: Me
+                    - name: Sister
+                    - name: Brother
+              - name: Aunt Matty
+                childs:
+                    - name: Distant cousin
