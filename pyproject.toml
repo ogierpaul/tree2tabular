@@ -1,6 +1,5 @@
 [project]
 name = "tree2tabular"
-version = "1.0"
 description = "Wrapper around treelib to convert tree to tabular format"
 requires-python = ">=3.7"
 classifiers = [
