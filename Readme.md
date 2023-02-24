@@ -1,7 +1,9 @@
 # tree2tabular
 # ===============
 # Purpose:
-Convert a tree structure to a tabular format
+Convert a tree structure to a tabular format.    
+Wrapper around [treelib](https://github.com/caesar0301/treelib) with a few additional features geared towards easier data modelling for analytics engineers.    
+
 # Abstract:
 * Tree structures are often used to represent hierarchical data. However, they are not always easy to work with. This script converts a tree structure from a yaml file to a tabular format.    
 * The script can also be used to generate unique ids for each node in the tree.
