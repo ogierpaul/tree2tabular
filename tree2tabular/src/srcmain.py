@@ -60,6 +60,8 @@ class TreeBuilder(object):
     def _map_identifiers_from_dict(self, children) ->list:
         for child in children:
             if child.get('id') is not None:
+                if child.get('id') == 0:
+                    raise KeyError(f"""id 0 is reserved for root node""")
                 self._identifiers.append(child.get('id'))
             if child.get('childs') is not None:
                 self._map_identifiers_from_dict(child.get('childs'))
@@ -169,6 +171,32 @@ class TreeBuilder(object):
         if len(childs) == 0:
             childs = None
         return childs
+
+
+    def to_parent_child(self, use_names=False) -> pd.DataFrame:
+        y = pd.Series(name='parent_id', dtype='object')
+        y.index.name='child_id'
+        child_ids = self.tree.nodes.keys()
+        # child_ids = [i for i in child_ids if i != 0]
+        for child_id in child_ids:
+            level = self.tree.level(child_id)
+            parent = self.tree.ancestor(child_id, level -1)
+            parent_id = parent.identifier
+            y.loc[child_id] = parent_id
+            if parent_id is None:
+                raise (ValueError(f"""Parent id is None for child id {child_id}"""))
+            if child_id is None:
+                raise (ValueError(f"""Child id is None for parent id {parent_id}"""))
+        df = pd.DataFrame(y).reset_index(drop=False)
+        if use_names:
+            df['parent_name'] = df['parent_id'].map(lambda ix: self.tree[ix].tag)
+            df['child_name'] = df['child_id'].map(lambda ix: self.tree[ix].tag)
+            df = df[['parent_name', 'child_name']]
+        else:
+            df = df[['parent_id', 'child_id']]
+        return df
+
+
 
 
 
