@@ -7,7 +7,7 @@ on:
     branches: [main, dev_*, qa*, paul_*]
 
 jobs:
-  staging_functions:
+  pytest_functions:
     runs-on: ubuntu-latest
     strategy:
       matrix:
