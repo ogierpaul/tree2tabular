@@ -80,9 +80,10 @@ class TreeBuilder(object):
         for i in range(n_levels):
             df[i + 1] = df[i + 1].fillna(df[i])
             df[txt_columns[i]] = df[i + 1].map(lambda x: self.tree.get_node(x).tag)
+        if df[n_levels].nunique() != df.shape[0]:
+            raise (ValueError(f"""Duplicate values in column {n_levels}"""))
         df.rename(columns=dict(zip(range(1, n_levels + 1), key_columns)), inplace=True)
         df.drop([0], axis=1, inplace=True)
-        #TODO: add uniqueness check
         return df
 
     def to_csv(self, fn:str, overwrite:bool = False, **kwargs):
