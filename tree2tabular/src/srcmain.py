@@ -83,7 +83,7 @@ class TreeBuilder(object):
         if df[n_levels].nunique() != df.shape[0]:
             raise (ValueError(f"""Duplicate values in column {n_levels}"""))
         df.rename(columns=dict(zip(range(1, n_levels + 1), key_columns)), inplace=True)
-        df.drop([0], axis=1, inplace=True)
+        df = df[txt_columns + key_columns] # reorder columns and remove first column
         return df
 
     def to_csv(self, fn:str, overwrite:bool = False, **kwargs):
