@@ -11,9 +11,6 @@ def handle_case(fd):
     tree = TreeBuilder.from_yaml(os.path.join(fd, fn))
     tree.to_yaml(os.path.join(fd, yaml_output), overwrite=True)
     tree.to_csv(os.path.join(fd, csv_output), overwrite=True)
-    # TODO: case with duplicates
-    # TODO: case with missing parent
-    # TODO: case with missing ids
     return True
 def test_case_readme():
     assert handle_case('demo_readme')

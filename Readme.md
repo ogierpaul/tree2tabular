@@ -79,5 +79,8 @@ tree.to_yaml('my_tree_with_ids.yaml')
 * The `TXT_` columns contain the names of the nodes
 * There is no blank: if a node has no child, the `DIM_` and `TXT_` columns of the lowest level are filled with the id and name of the node
 
+### Example
+You can find examples in the `tests` > `demos*` folders.
+
 
 
