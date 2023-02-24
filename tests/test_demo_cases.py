@@ -16,16 +16,16 @@ def handle_case(fd):
     # TODO: case with missing ids
     return True
 def test_case_readme():
-    assert handle_case('case_readme')
+    assert handle_case('demo_readme')
 
 def test_case_no_id_provided():
-    assert handle_case('case_no_id_provided')
+    assert handle_case('demo_no_id_provided')
 
 def test_case_id_provided():
-    assert handle_case('case_id_provided')
+    assert handle_case('demo_id_provided')
 
 def test_case_some_id_provided():
-    assert handle_case('case_some_id_provided')
+    assert handle_case('demo_some_id_provided')
 
 
 

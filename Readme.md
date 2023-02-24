@@ -35,9 +35,8 @@ in python write:
 from tree2tabular import TreeBuilder
 fn = 'my_tree.yaml'
 tree = TreeBuilder.from_yaml(fn)
-df = tree.to_dataframe()
 tree.to_csv('my_tree.csv')
-tree.to_yaml('my_tree_with_ids.yaml')
+
 ```
 
 output: automatically generated ids and tree in tabular structure:    
@@ -47,6 +46,16 @@ output: automatically generated ids and tree in tabular structure:
 |  0 | d13358              | 75e8bd              | df14ab              | subcategory         | subsubcategory      | subsubsubcategory   |
 |  1 | 193e3e              | 7f9f4f              | 7f9f4f              | subcategory2        | subsubcategory2     | subsubcategory2     |
 
+## Others methods
+Re-use as a dataframe:
+```python
+df = tree.to_dataframe()
+```
+
+Export a new yaml file with ids:
+```python
+tree.to_yaml('my_tree_with_ids.yaml')
+```
 
 
 

@@ -1,0 +1,13 @@
+Hierarchy:
+    name: category
+    id_generation: wrong-value
+    # Keep this structure for the nodes
+    childs:
+        - name: subcategory
+          childs:
+              - name: subsubcategory
+                childs:
+                    - name: subsubsubcategory
+        - name: subcategory2
+          childs:
+              - name: subsubcategory2

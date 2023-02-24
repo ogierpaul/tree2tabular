@@ -4,10 +4,10 @@ import os
 import uuid
 from treelib import Tree
 from collections import OrderedDict
-from yaml import SafeLoader
+from yaml import SafeDumper
 
 
-def ordered_dump(data, stream=None, Dumper=yaml.SafeDumper, **kwds):
+def _ordered_dump(data, stream=None, Dumper=yaml.SafeDumper, **kwds):
     ## FROM: https://stackoverflow.com/questions/10648614/dump-in-pyyaml-as-utf-8
     class OrderedDumper(Dumper):
         pass
@@ -19,7 +19,7 @@ def ordered_dump(data, stream=None, Dumper=yaml.SafeDumper, **kwds):
     OrderedDumper.add_representer(OrderedDict, _dict_representer)
     return yaml.dump(data, stream, OrderedDumper, allow_unicode=True, **kwds)
 
-def load_yaml(fn:str) ->dict:
+def _load_yaml(fn:str) ->dict:
     with open(fn) as f:
         d = yaml.safe_load(f)
     return d
@@ -30,18 +30,24 @@ class TreeBuilder(object):
         self.d = d
         assert d.get('Hierarchy') is not None
         self.id_generation = d['Hierarchy']['id_generation']
+        if self.id_generation not in self._generation_possible_values:
+            raise (ValueError(
+                f"""id_generation {self.id_generation} not supported, must be one of {self._generation_possible_values}"""
+            ))
         self.tree = Tree()
         self.tree.create_node('Root', 'root')
         self.dim_name = d['Hierarchy']['name']
-        self.build()
+        self._build()
 
     @classmethod
     def from_yaml(cls, fn:str):
-        return cls(load_yaml(fn))
+        return cls(_load_yaml(fn))
 
-
-    def explore_sub_level(self, parent_id:str, childs:dict):
+    def _explore_sub_level(self, parent_id:str, childs:dict):
         for c in childs:
+            if c.get('name') is None:
+                raise (KeyError(f"""No name provided for node id {c.get('id')}: \
+                 under parent id {parent_id} and parent name {self.tree.get_node(parent_id).tag}"""))
             if c.get('id') is None:
                 if self.id_generation == 'name':
                     child_id = c.get('name')
@@ -50,18 +56,23 @@ class TreeBuilder(object):
                 elif self.id_generation == 'error':
                     raise (KeyError(f"""No id provided for node name {c.get('name')}"""))
                 else:
-                    raise (KeyError(f"""id_generation {self.id_generation} not supported, must be one of {self._generation_possible_values}"""))
+                    raise (ValueError(f"""id_generation {self.id_generation} not supported, must be one of {self._generation_possible_values}"""))
             else:
                 child_id = c.get('id')
+            if self.tree.get_node(child_id) is not None:
+                new_node_name = c.get('name')
+                existing_node_name = self.tree.get_node(child_id).tag
+                raise (KeyError(f"""Node identifier {child_id} is not unique, \
+                please check your hierarchy for node names {new_node_name} and {existing_node_name}"""))
             self.tree.create_node(c.get('name'), child_id, parent=parent_id)
             if c.get('childs') is not None:
-                self.explore_sub_level(child_id, c.get('childs'))
+                self._explore_sub_level(child_id, c.get('childs'))
 
-    def build(self):
-        self.explore_sub_level('root', self.d.get('Hierarchy').get('childs'))
+    def _build(self):
+        self._explore_sub_level('root', self.d.get('Hierarchy').get('childs'))
         return self.tree
 
-    def to_tabular(self):
+    def to_dataframe(self) ->pd.DataFrame:
         n_levels = self.tree.depth()
         df = pd.DataFrame(self.tree.paths_to_leaves())
         key_columns = [f'DIM_{self.dim_name.upper()}_LVL{i + 1}' for i in range(n_levels)]
@@ -71,16 +82,16 @@ class TreeBuilder(object):
             df[txt_columns[i]] = df[i + 1].map(lambda x: self.tree.get_node(x).tag)
         df.rename(columns=dict(zip(range(1, n_levels + 1), key_columns)), inplace=True)
         df.drop([0], axis=1, inplace=True)
+        #TODO: add uniqueness check
         return df
 
     def to_csv(self, fn:str, overwrite:bool = False, **kwargs):
-        df = self.to_tabular()
+        df = self.to_dataframe()
         if not overwrite:
             if os.path.exists(fn):
                 raise (FileExistsError(f"""File {fn} already exists"""))
         df.to_csv(fn, index=False,**kwargs)
         return None
-
 
 
     def to_ordered_dict(self) -> OrderedDict:
@@ -99,8 +110,7 @@ class TreeBuilder(object):
             raise (FileExistsError(f"""File {fn} already exists"""))
         else:
             with open(fn, 'w') as f:
-                s = ordered_dump(self.to_ordered_dict(), f)
-                #yaml_file.write(s)
+                s = _ordered_dump(self.to_ordered_dict(), f)
         return None
 
     def _list_children(self, nid=None):

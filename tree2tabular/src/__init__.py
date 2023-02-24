@@ -1,1 +1,1 @@
-from tree2tabular.src.srcmain import load_yaml, TreeBuilder
+from tree2tabular.src.srcmain import _load_yaml, TreeBuilder
