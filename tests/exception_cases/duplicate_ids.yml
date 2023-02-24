@@ -1,0 +1,8 @@
+Hierarchy:
+    name: category
+    id_generation: error # Will throw an error no ids are provided
+    childs:
+        - name: subcategory
+          id: 1
+        - name: subcategory2
+          id: 1 # Duplicate id

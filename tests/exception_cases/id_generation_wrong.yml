@@ -1,7 +1,6 @@
 Hierarchy:
     name: category
-    id_generation: wrong-value
-    # Keep this structure for the nodes
+    id_generation: wrong-value # This must be one of the following: uuid, name, error
     childs:
         - name: subcategory
           childs:
